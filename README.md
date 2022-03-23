@@ -1,4 +1,4 @@
-##Temática: Plataforma y servicio de Streaming
+Temática: Plataforma y servicio de Streaming
 
 Plataforma web/mobile similar a Netflix o Amazon Prime Video que ofrece
 streaming de series y películas.
