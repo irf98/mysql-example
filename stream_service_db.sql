@@ -166,32 +166,26 @@ INSERT INTO free_users VALUES
 
 ######################### VIEWS
 
-# Lista solo el contenido premium de la plataforma:
 CREATE OR REPLACE VIEW premium_content AS
 	SELECT id_movie AS product_id, title, genre, year, director, rating, category FROM movies WHERE premium = TRUE
     UNION
     SELECT id_show AS product_id, title, genre, year, director, rating, category FROM shows WHERE premium = TRUE;
 
-# Lista solo el contenido free de la plataforma:
 CREATE OR REPLACE VIEW free_content AS
 	SELECT id_movie AS product_id, title, genre, year, director, rating, category FROM movies WHERE premium = FALSE
     UNION
     SELECT id_show AS product_id, title, genre, year, director, rating, category FROM shows WHERE premium = FALSE;
 
-# Lista el contenido con mayor puntuación de la plataforma (premium y free):
 CREATE OR REPLACE VIEW top_content AS
 	SELECT id_movie AS product_id, title, rating, category, premium FROM movies WHERE rating > 8
 	UNION
 	SELECT id_show AS product_id, title, rating, category, premium FROM shows WHERE rating > 8;
 
-# Lista contenido de corta duración, "Quick watch". En caso de películas que duren menos de 100 minutos y en las series
-# que duren menos de 30 minutos:
 CREATE OR REPLACE VIEW quick_watch AS
 	SELECT id_movie, title, genre, year, director, duration, rating, premium, category FROM movies WHERE duration < 100
     UNION
     SELECT id_show, title, genre, year, director, duration, rating, premium, category FROM shows WHERE duration < 30;
 
-# Lista los usuarios en deuda, que todavía no pagaron:
 CREATE OR REPLACE VIEW users_in_debt AS
 	SELECT id_premium_user, expiration, last_payment
     FROM premium_users 
